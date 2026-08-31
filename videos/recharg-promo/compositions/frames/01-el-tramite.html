@@ -4,13 +4,13 @@
     data-composition-id="01-el-tramite"
     data-width="1920"
     data-height="1080"
-    data-duration="2.965"
+    data-duration="3.365"
   >
     <!-- Full-bleed carbon ground (never on #root itself) -->
     <div
       class="clip t01e-bg"
       data-start="0"
-      data-duration="2.965"
+      data-duration="3.365"
       data-track-index="0"
     ></div>
 
@@ -18,7 +18,7 @@
     <div
       class="clip t01e-stage"
       data-start="0"
-      data-duration="2.965"
+      data-duration="3.365"
       data-track-index="1"
     >
       <div class="t01e-group" id="t01e-group">
@@ -110,7 +110,7 @@
     }
   </style>
 
-  <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+  <script src="assets/vendor/gsap.min.js"></script>
   <script>
     (() => {
       window.__timelines = window.__timelines || {};
@@ -183,6 +183,9 @@
 
       // ── Scene 3 (2.4–2.965s) — total stillness on the struck pain.
       // No exit: Frame 2's zoom-through transition owns the exit.
+    
+      /* hf-hold-pad: extiende el timeline hasta la duración del root (3.365s) para que el hold final sea estable en cualquier seek */
+      tl.to({}, { duration: 0.001 }, 3.3640000000000003);
     })();
   </script>
 </template>

@@ -70,7 +70,7 @@ keyMessage: La recarga, resuelta en tu cochera.
 - voiceover: "Un cargador dedicado donde estacionás — hasta veintidós kilovatios — con tu carga visible en la app."
 - duration: 5.504s
 - transition_in: crossfade
-- status: outline
+- status: animated
 - src: compositions/frames/03-la-prueba.html
 - type: feature_showcase
 - persuasion: Show-don't-tell proof — los números y la app del propio sitio como evidencia
@@ -93,7 +93,7 @@ keyMessage: Cargador dedicado + potencia real + carga visible.
 
 - scene: Cierre calmo: "Tu auto carga mientras dormís." resuelve en el lockup Recharg + botón magenta HABLEMOS
 - voiceover: "Tu auto carga mientras dormís. Hablemos."
-- duration: 2.368s
+- duration: 3.6s
 - transition_in: crossfade
 - status: animated
 - src: compositions/frames/04-mientras-dormis.html

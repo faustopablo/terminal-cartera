@@ -1,5 +1,12 @@
 <template>
-  <style>
+  <div
+    id="root"
+    data-composition-id="03-la-prueba"
+    data-width="1920"
+    data-height="1080"
+    data-duration="6.004"
+  >
+<style>
     /* ===== 03-la-prueba — Broadside dark register, Stat-Grid treatment ===== */
     #root {
       position: relative;
@@ -116,7 +123,7 @@
       font-size: 42px;
       font-weight: 700;
       letter-spacing: -0.02em;
-      color: #50484d;
+      color: #9a9498;
       white-space: nowrap;
     }
     .f03p-kw-wrap {
@@ -191,7 +198,7 @@
       font-weight: 500;
       letter-spacing: 0.14em;
       text-transform: uppercase;
-      color: #50484d;
+      color: #9a9498;
     }
     .f03p-app-row-val {
       font-family: "IBM Plex Mono", "Menlo", "Consolas", monospace;
@@ -240,21 +247,15 @@
       color: #ec13a0;
     }
     .f03p-chrome-r {
-      color: #50484d;
+      color: #9a9498;
     }
   </style>
 
-  <div
-    id="root"
-    data-composition-id="03-la-prueba"
-    data-width="1920"
-    data-height="1080"
-  >
-    <!-- full-bleed ground -->
-    <div class="clip f03p-bg" data-start="0" data-duration="5.504" data-track-index="0"></div>
+      <!-- full-bleed ground -->
+    <div class="clip f03p-bg" data-start="0" data-duration="6.004" data-track-index="0"></div>
 
     <!-- triptych stage -->
-    <div class="clip f03p-stage" data-start="0" data-duration="5.504" data-track-index="1">
+    <div class="clip f03p-stage" data-start="0" data-duration="6.004" data-track-index="1">
       <div class="f03p-camera" id="f03p-camera">
         <!-- Scene 4: one-pass magenta glow behind the cards -->
         <div class="f03p-glow" id="f03p-glow"></div>
@@ -281,7 +282,7 @@
                 <path
                   id="f03p-cable"
                   d="M100 188 C 100 220, 66 212, 56 230"
-                  stroke="#50484d"
+                  stroke="#9a9498"
                   stroke-width="7"
                   stroke-linecap="round"
                   fill="none"
@@ -355,13 +356,13 @@
     </div>
 
     <!-- fixed chrome HUD -->
-    <div class="clip f03p-chrome" id="f03p-chrome" data-start="0" data-duration="5.504" data-track-index="2">
+    <div class="clip f03p-chrome" id="f03p-chrome" data-start="0" data-duration="6.004" data-track-index="2">
       <span class="f03p-chrome-l">Cargador · Potencia · App</span>
       <span class="f03p-chrome-r">Recharg / 03</span>
     </div>
   </div>
 
-  <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+  <script src="assets/vendor/gsap.min.js"></script>
   <script>
     (function () {
       window.__timelines = window.__timelines || {};
@@ -534,6 +535,9 @@
       /* then everything holds still to the end */
 
       window.__timelines["03-la-prueba"] = tl;
+    
+      /* hf-hold-pad: extiende el timeline hasta la duración del root (6.004s) para que el hold final sea estable en cualquier seek */
+      tl.to({}, { duration: 0.001 }, 6.002999999999999);
     })();
   </script>
 </template>
