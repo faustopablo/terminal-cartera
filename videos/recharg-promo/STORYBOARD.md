@@ -23,7 +23,7 @@ music: confident minimal tech underscore, dark premium electronic
 - voiceover: "Cargar tu auto eléctrico — no debería ser un trámite."
 - duration: 2.965s
 - transition_in: cut
-- status: outline
+- status: animated
 - src: compositions/frames/01-el-tramite.html
 - type: hook
 - persuasion: Pain validation
@@ -46,7 +46,7 @@ keyMessage: Cargar no debería ser un trámite.
 - voiceover: "Recharg. La recarga, resuelta en tu cochera."
 - duration: 2.645s
 - transition_in: zoom-through
-- status: outline
+- status: animated
 - src: compositions/frames/02-recharg.html
 - type: product_intro
 - persuasion: Friction reduction — el producto elimina el trámite llevándolo a donde el auto duerme
