@@ -1,0 +1,247 @@
+<template>
+  <div
+    id="root"
+    data-composition-id="02-recharg"
+    data-width="1080"
+    data-height="1920"
+    data-duration="3.145"
+  >
+    <style>
+      /* No font files ship with this project (assets/fonts is absent) — frame.md's own
+         Known Gaps maps display to Helvetica Neue with Arial fallback; system stack only,
+         no network imports, no fabricated @font-face. */
+      #root {
+        position: relative;
+        width: 1080px;
+        height: 1920px;
+        overflow: hidden;
+        container-type: size;
+        font-family: "Helvetica Neue", "Helvetica", "Arial", "Liberation Sans", sans-serif;
+      }
+
+      /* Full-bleed carbon ground — dedicated clip, never painted on #root */
+      .rc02-bg {
+        position: absolute;
+        inset: 0;
+        background: #0b0f0f;
+      }
+
+      .rc02-stage {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        /* bias the block toward 0.42 × height, well above the 83% keep-out */
+        padding-bottom: 8cqh;
+      }
+
+      /* ---- layer 1: one-shot magenta glow behind the lockup ---- */
+      .rc02-glow {
+        position: absolute;
+        left: 50%;
+        top: 34cqh;
+        width: 46cqw;
+        height: 46cqw;
+        margin-left: -23cqw;
+        margin-top: -23cqw;
+        border-radius: 50%;
+        background: radial-gradient(
+          circle,
+          rgba(236, 19, 160, 0.5) 0%,
+          rgba(236, 19, 160, 0.18) 40%,
+          rgba(236, 19, 160, 0) 68%
+        );
+        filter: blur(3cqw);
+        opacity: 0;
+        pointer-events: none;
+      }
+
+      /* ---- layers 2 + 3: icon + wordmark lockup ---- */
+      .rc02-lockup {
+        position: relative;
+        display: flex;
+        align-items: center;
+        gap: 1.8cqw;
+      }
+      .rc02-icon {
+        width: 11.5cqw;
+        height: auto;
+        display: block;
+        transform-origin: 50% 50%;
+        will-change: transform;
+      }
+      .rc02-wordmask {
+        overflow: hidden;
+      }
+      .rc02-wordmark {
+        display: inline-block;
+        font-size: 7.5cqw;
+        font-weight: 900;
+        line-height: 1;
+        letter-spacing: -0.03em;
+        color: #ffffff;
+        padding: 0.06em 0.04em 0.1em;
+        will-change: transform;
+      }
+
+      /* ---- tagline, per-word ---- */
+      .rc02-tagline {
+        margin-top: 3.4cqw;
+        display: flex;
+        flex-wrap: nowrap;
+        gap: 0.32em;
+        font-size: 4.3cqw;
+        font-weight: 700;
+        line-height: 1.15;
+        letter-spacing: -0.02em;
+        color: #ffffff;
+        white-space: nowrap;
+      }
+      .rc02-word {
+        display: inline-block;
+        position: relative;
+        will-change: transform, opacity;
+        opacity: 0;
+      }
+      .rc02-bar {
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: -0.55cqw;
+        height: 0.3cqw;
+        background: #ec13a0;
+        transform: scaleX(0);
+        transform-origin: left center;
+      }
+    </style>
+
+    <!-- ground -->
+    <div class="clip rc02-bg" data-start="0" data-duration="3.145" data-track-index="0"></div>
+
+    <!-- content -->
+    <div class="clip rc02-stage" data-start="0" data-duration="3.145" data-track-index="1">
+      <div class="rc02-glow" id="rc02-glow"></div>
+
+      <div class="rc02-lockup">
+        <!-- Recharg icon: wall charger w/ bolt, plug at left, car silhouette below -->
+        <svg
+          id="rc02-icon"
+          class="rc02-icon"
+          viewBox="0 0 230 230"
+          xmlns="http://www.w3.org/2000/svg"
+          aria-hidden="true"
+        >
+          <!-- cargador: contorno magenta -->
+          <rect x="78" y="10" width="100" height="138" rx="22" fill="none" stroke="#EC13A0" stroke-width="12" />
+          <!-- rayo magenta -->
+          <polygon points="138,32 102,88 126,88 114,126 158,70 132,70" fill="#EC13A0" />
+          <!-- enchufe -->
+          <rect x="16" y="26" width="32" height="36" rx="9" fill="#EC13A0" />
+          <rect x="2" y="32" width="16" height="7" rx="3.5" fill="#EC13A0" />
+          <rect x="2" y="47" width="16" height="7" rx="3.5" fill="#EC13A0" />
+          <!-- cable enrulado hacia el cargador -->
+          <path d="M32 62 v14 c0 14 10 20 22 20 h10 c8 0 14 -6 14 -13" fill="none" stroke="#EC13A0" stroke-width="9" stroke-linecap="round" />
+          <!-- auto blanco line-art, superpuesto al frente -->
+          <path d="M62 208 v-20 c0 -8 5 -13 12 -15 l12 -7 c7 -14 18 -20 42 -20 c24 0 35 6 42 20 l12 7 c7 2 12 7 12 15 v20 z" fill="#0B0F0F" stroke="#FFFFFF" stroke-width="9" stroke-linejoin="round" />
+          <path d="M96 166 c20 -8 46 -8 66 0" fill="none" stroke="#FFFFFF" stroke-width="7" stroke-linecap="round" />
+          <circle cx="92" cy="208" r="11" fill="#0B0F0F" stroke="#FFFFFF" stroke-width="7" />
+          <circle cx="166" cy="208" r="11" fill="#0B0F0F" stroke="#FFFFFF" stroke-width="7" />
+        </svg>
+
+        <!-- wordmark, revealed from behind the icon under an overflow mask -->
+        <div class="rc02-wordmask">
+          <span class="rc02-wordmark" id="rc02-wordmark">Recharg</span>
+        </div>
+      </div>
+
+      <!-- tagline builds per-word; underline grows under "cochera." -->
+      <div class="rc02-tagline" id="rc02-tagline"></div>
+    </div>
+
+    <script src="assets/vendor/gsap.min.js"></script>
+    <script>
+      (function () {
+        window.__timelines = window.__timelines || {};
+        var tl = gsap.timeline({ paused: true });
+        window.__timelines["02-recharg"] = tl;
+
+        /* dynamic-content-sequencing (per-word variant): the word list + per-word
+           timing config is reduced once at build time into absolute cues — no
+           hardcoded DOM, no per-frame writes. */
+        var BASE_GAP = 0.14; // s between short words
+        var SEC_PER_CHAR = 0.018; // longer words earn slightly more runway
+        var WORDS = ["La", "recarga,", "resuelta", "en", "tu", "cochera."];
+        var cursor = 0.85; // Scene 2 opens as the VO enters the thesis
+        var CUES = WORDS.map(function (w) {
+          var start = cursor;
+          cursor += BASE_GAP + w.length * SEC_PER_CHAR;
+          return { text: w, start: start };
+        });
+
+        // Build the word spans once, synchronously
+        var tagline = document.getElementById("rc02-tagline");
+        var spans = CUES.map(function (cue, i) {
+          var s = document.createElement("span");
+          s.className = "rc02-word";
+          s.textContent = cue.text;
+          if (i === CUES.length - 1) {
+            var bar = document.createElement("span");
+            bar.className = "rc02-bar";
+            bar.id = "rc02-bar";
+            s.appendChild(bar);
+          }
+          tagline.appendChild(s);
+          return s;
+        });
+
+        /* Scene 1 (0.0–0.8s) — lockup lands dead-center */
+        // spring-pop-entrance: icon arrives scale 0 → 1, smooth power3 settle, no overshoot
+        tl.fromTo(
+          "#rc02-icon",
+          { scale: 0, opacity: 0 },
+          { scale: 1, opacity: 1, duration: 0.55, ease: "power3.out" },
+          0.02
+        );
+        // one-shot magenta glow behind: plain opacity fade in, then out (never repeats)
+        tl.fromTo(
+          "#rc02-glow",
+          { opacity: 0 },
+          { opacity: 0.85, duration: 0.4, ease: "power2.out" },
+          0.06
+        );
+        tl.to("#rc02-glow", { opacity: 0, duration: 0.75, ease: "power2.inOut" }, 0.72);
+        // wordmark slides out from behind the icon under the overflow-hidden mask
+        tl.fromTo(
+          "#rc02-wordmark",
+          { xPercent: -108 },
+          { xPercent: 0, duration: 0.5, ease: "power3.out" },
+          0.28
+        );
+
+        /* Scene 2 (0.8–2.2s) — tagline assembles per-word on the VO */
+        spans.forEach(function (el, i) {
+          tl.fromTo(
+            el,
+            { opacity: 0, y: 22 },
+            { opacity: 1, y: 0, duration: 0.38, ease: "power3.out" },
+            CUES[i].start
+          );
+        });
+        // on "cochera": thin magenta bar grows left → right under the word
+        tl.fromTo(
+          "#rc02-bar",
+          { scaleX: 0 },
+          { scaleX: 1, duration: 0.4, ease: "power3.out" },
+          2.05
+        );
+
+        /* Scene 3 (2.2–2.645s) — hold; nothing new enters */
+      
+      /* hf-hold-pad: extiende el timeline hasta la duración del root (3.145s) para que el hold final sea estable en cualquier seek */
+      tl.to({}, { duration: 0.001 }, 3.144);
+    })();
+    </script>
+  </div>
+</template>

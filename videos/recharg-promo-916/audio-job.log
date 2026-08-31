@@ -1,0 +1,14 @@
+· tts: kokoro · voice ef_dora · 4 line(s)
+· bgm: disabled
+✓ audio engine → /home/user/terminal-cartera/videos/recharg-promo/audio_engine_meta.json
+  heygen: no  ·  ran: tts,bgm
+  voices: 0  ·  bgm: none  ·  sfx: 0
+  total voice duration: 0s
+
+anomalies (non-fatal):
+  - line 04: bad voice duration — omitted
+  - line 01: bad voice duration — omitted
+  - line 03: bad voice duration — omitted
+  - line 02: bad voice duration — omitted
+  - bgm: retrieve requires a HeyGen credential — skipped (no generate fallback for an explicit retrieve)
+✓ audio generate: 0 voice + no bgm → /home/user/terminal-cartera/videos/recharg-promo/audio_meta.json

@@ -1,0 +1,191 @@
+<template>
+  <div
+    id="root"
+    data-composition-id="01-el-tramite"
+    data-width="1080"
+    data-height="1920"
+    data-duration="3.365"
+  >
+    <!-- Full-bleed carbon ground (never on #root itself) -->
+    <div
+      class="clip t01e-bg"
+      data-start="0"
+      data-duration="3.365"
+      data-track-index="0"
+    ></div>
+
+    <!-- Kinetic-type stage: two stacked pain lines, dark register -->
+    <div
+      class="clip t01e-stage"
+      data-start="0"
+      data-duration="3.365"
+      data-track-index="1"
+    >
+      <div class="t01e-group" id="t01e-group">
+        <div class="t01e-line1" id="t01e-line1">
+          <span class="t01e-w">Cargar</span>
+          <span class="t01e-w">tu</span>
+          <span class="t01e-w">auto</span>
+          <span class="t01e-w">eléctrico</span>
+        </div>
+        <div class="t01e-line2" id="t01e-line2">
+          no debería ser un
+          <span class="t01e-tram"
+            >trámite<span class="t01e-strike" id="t01e-strike"></span
+          ></span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <style>
+    #root {
+      position: relative;
+      width: 1080px;
+      height: 1920px;
+      overflow: hidden;
+      container-type: size;
+    }
+    .t01e-bg {
+      position: absolute;
+      inset: 0;
+      background: #0b0f0f;
+    }
+    .t01e-stage {
+      position: absolute;
+      inset: 0;
+    }
+    .t01e-group {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 2cqw;
+      padding: 0 5.5cqw;
+      text-align: center;
+    }
+    /* Beat 1 — statement line, Helvetica display lowercase (design signature) */
+    .t01e-line1 {
+      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      font-size: 4.6cqw;
+      font-weight: 700;
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+      text-transform: lowercase;
+      color: #ffffff;
+      white-space: nowrap;
+    }
+    .t01e-w {
+      display: inline-block;
+      will-change: transform, filter, opacity;
+    }
+    /* Beat 2 — the punch line, heavier + larger (the one display moment) */
+    .t01e-line2 {
+      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      font-size: 6.2cqw;
+      font-weight: 900;
+      line-height: 1.0;
+      letter-spacing: -0.03em;
+      text-transform: lowercase;
+      color: #ffffff;
+      white-space: nowrap;
+      opacity: 0;
+      will-change: transform, filter, opacity;
+    }
+    .t01e-tram {
+      position: relative;
+      display: inline-block;
+    }
+    /* Thin fire strike-through bar — grows left→right via scaleX */
+    .t01e-strike {
+      position: absolute;
+      left: -3%;
+      width: 106%;
+      height: 0.085em;
+      top: calc(50% - 0.0425em);
+      background: #ec13a0;
+      transform-origin: left center;
+    }
+  </style>
+
+  <script src="assets/vendor/gsap.min.js"></script>
+  <script>
+    (() => {
+      window.__timelines = window.__timelines || {};
+      const tl = gsap.timeline({ paused: true });
+      window.__timelines["01-el-tramite"] = tl;
+
+      const group = "#t01e-group";
+      const line2 = "#t01e-line2";
+      const strike = "#t01e-strike";
+      const words = gsap.utils.toArray(".t01e-w");
+
+      // Deterministic initial states (seek-safe from frame 0)
+      // Group starts lower so line 1 alone reads dead-center at t=0.
+      tl.set(group, { y: 78 }, 0);
+      tl.set(words, { opacity: 0 }, 0);
+      tl.set(line2, { opacity: 0 }, 0);
+      tl.set(strike, { scaleX: 0 }, 0);
+
+      // ── Scene 1 (0.0–1.2s) — per-word staggered reveal, settle long-tail
+      // (dynamic-content-sequencing: onsets computed from one word grid)
+      const WORD_START = 0.05;
+      const WORD_PULSE = 0.14;
+      words.forEach((w, i) => {
+        tl.fromTo(
+          w,
+          { y: 46, opacity: 0, filter: "blur(10px)" },
+          {
+            y: 0,
+            opacity: 1,
+            filter: "blur(0px)",
+            duration: 0.75,
+            ease: "power3.out",
+          },
+          WORD_START + WORD_PULSE * i
+        );
+      });
+
+      // ── Scene 2 (1.2–2.4s) — kinetic beat-slam on one beat grid
+      const PULSE = 0.3;
+      const BEAT2 = PULSE * 4; // 1.2s — "no debería ser un trámite"
+
+      // Causal nudge: the stack rises to the mid-upper third as line 2 lands
+      tl.to(
+        group,
+        { y: -60, duration: 0.55, ease: "power3.inOut" },
+        BEAT2 - 0.06
+      );
+
+      // Distinct entrance vs. beat 1: scale + blur slam
+      tl.fromTo(
+        line2,
+        { scale: 1.5, opacity: 0, filter: "blur(16px)" },
+        {
+          scale: 1,
+          opacity: 1,
+          filter: "blur(0px)",
+          duration: 0.5,
+          ease: "power4.out",
+        },
+        BEAT2
+      );
+
+      // Strike-through: thin magenta bar grows left→right as "trámite" lands
+      tl.fromTo(
+        strike,
+        { scaleX: 0 },
+        { scaleX: 1, duration: 0.38, ease: "power2.out" },
+        BEAT2 + 0.52
+      );
+
+      // ── Scene 3 (2.4–2.965s) — total stillness on the struck pain.
+      // No exit: Frame 2's zoom-through transition owns the exit.
+    
+      /* hf-hold-pad: extiende el timeline hasta la duración del root (3.365s) para que el hold final sea estable en cualquier seek */
+      tl.to({}, { duration: 0.001 }, 3.3640000000000003);
+    })();
+  </script>
+</template>

@@ -1,0 +1,270 @@
+<template data-composition-id="04-mientras-dormis">
+  <style>
+    #root {
+      position: absolute;
+      inset: 0;
+      width: 1080px;
+      height: 1920px;
+      overflow: hidden;
+      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    }
+
+    .clip {
+      position: absolute;
+      inset: 0;
+    }
+
+    /* Full-bleed ground — dark register (ink-black) */
+    .md4-bg {
+      background: #0b0f0f;
+    }
+
+    /* ---- Scene 1: tagline, word-by-word quiet fade ---- */
+    .md4-tagline {
+      position: absolute;
+      left: 12%;
+      right: 12%;
+      top: 760px;
+      text-align: center;
+      font-weight: 900;
+      font-size: 92px;
+      line-height: 1.04;
+      letter-spacing: -0.03em;
+      color: #ffffff;
+      transform-origin: 50% 50%;
+      will-change: transform, opacity;
+    }
+    .md4-word {
+      display: inline-block;
+      opacity: 0;
+      color: #50484d;
+      will-change: opacity, color;
+    }
+
+    /* ---- Scene 2: Recharg lockup ---- */
+    .md4-lockup {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 800px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 36px;
+    }
+    .md4-mark {
+      width: 170px;
+      height: 170px;
+      flex: 0 0 auto;
+      opacity: 0;
+      transform-origin: 50% 50%;
+      will-change: transform, opacity;
+    }
+    .md4-wordmark {
+      font-weight: 800;
+      font-size: 106px;
+      line-height: 1;
+      letter-spacing: -0.02em;
+      color: #ffffff;
+      clip-path: inset(0% 100% 0% 0%);
+      will-change: clip-path;
+    }
+
+    /* ---- Scene 3: CTA pill ---- */
+    .md4-cta-row {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 1150px;
+      display: flex;
+      justify-content: center;
+    }
+    .md4-url {
+      margin-top: 22px;
+      font-weight: 600;
+      font-size: 26px;
+      letter-spacing: 0.06em;
+      color: rgba(255, 255, 255, 0.82);
+      text-align: center;
+      opacity: 0;
+      will-change: opacity;
+    }
+    .md4-cta-col {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .md4-cta-link {
+      text-decoration: none;
+      display: inline-block;
+    }
+    .md4-cta {
+      background: #ec13a0;
+      color: #0b0f0f;
+      font-weight: 700;
+      font-size: 30px;
+      letter-spacing: 0.14em;
+      padding: 26px 68px;
+      border-radius: 999px;
+      opacity: 0;
+      transform-origin: 50% 50%;
+      will-change: transform, opacity;
+    }
+  </style>
+
+  <div id="root" data-composition-id="04-mientras-dormis" data-width="1080" data-height="1920">
+    <!-- ground -->
+    <div
+      class="clip md4-bg"
+      data-start="0"
+      data-duration="3.6"
+      data-track-index="0"
+    ></div>
+
+    <!-- stage -->
+    <div
+      class="clip"
+      id="md4-stage"
+      data-start="0"
+      data-duration="3.6"
+      data-track-index="1"
+    >
+      <!-- Scene 1 — "tu auto carga mientras dormís." -->
+      <div class="md4-tagline" id="md4-tagline">
+        <span class="md4-word">tu</span>
+        <span class="md4-word">auto</span>
+        <span class="md4-word">carga</span><br />
+        <span class="md4-word">mientras</span>
+        <span class="md4-word">dorm&iacute;s.</span>
+      </div>
+
+      <!-- Scene 2 — Recharg lockup: mark blooms at dead center, slides left, wordmark wipes in -->
+      <div class="md4-lockup">
+        <svg
+          class="md4-mark"
+          id="md4-mark"
+          viewBox="0 0 230 230"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <!-- cargador: contorno magenta -->
+          <rect x="78" y="10" width="100" height="138" rx="22" fill="none" stroke="#EC13A0" stroke-width="12" />
+          <!-- rayo magenta -->
+          <polygon points="138,32 102,88 126,88 114,126 158,70 132,70" fill="#EC13A0" />
+          <!-- enchufe -->
+          <rect x="16" y="26" width="32" height="36" rx="9" fill="#EC13A0" />
+          <rect x="2" y="32" width="16" height="7" rx="3.5" fill="#EC13A0" />
+          <rect x="2" y="47" width="16" height="7" rx="3.5" fill="#EC13A0" />
+          <!-- cable enrulado hacia el cargador -->
+          <path d="M32 62 v14 c0 14 10 20 22 20 h10 c8 0 14 -6 14 -13" fill="none" stroke="#EC13A0" stroke-width="9" stroke-linecap="round" />
+          <!-- auto blanco line-art, superpuesto al frente -->
+          <path d="M62 208 v-20 c0 -8 5 -13 12 -15 l12 -7 c7 -14 18 -20 42 -20 c24 0 35 6 42 20 l12 7 c7 2 12 7 12 15 v20 z" fill="#0B0F0F" stroke="#FFFFFF" stroke-width="9" stroke-linejoin="round" />
+          <path d="M96 166 c20 -8 46 -8 66 0" fill="none" stroke="#FFFFFF" stroke-width="7" stroke-linecap="round" />
+          <circle cx="92" cy="208" r="11" fill="#0B0F0F" stroke="#FFFFFF" stroke-width="7" />
+          <circle cx="166" cy="208" r="11" fill="#0B0F0F" stroke="#FFFFFF" stroke-width="7" />
+        </svg>
+        <div class="md4-wordmark" id="md4-wordmark">Recharg</div>
+      </div>
+
+      <!-- Scene 3 — CTA pill (linkeada) + URL visible -->
+      <div class="md4-cta-row">
+        <div class="md4-cta-col">
+          <a class="md4-cta-link" href="http://www.recharg.com.ar" target="_blank" rel="noopener">
+            <div class="md4-cta" id="md4-cta">HABLEMOS</div>
+          </a>
+          <div class="md4-url" id="md4-url">www.recharg.com.ar</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="assets/vendor/gsap.min.js"></script>
+  <script>
+    (function () {
+      window.__timelines = window.__timelines || {};
+      var tl = gsap.timeline({ paused: true });
+      window.__timelines["04-mientras-dormis"] = tl;
+
+      /* Offset that puts the mark at dead frame center during the bloom:
+         half of (wordmark width + gap) with the lockup row centered. */
+      var MARK_CENTER_X = 230;
+
+      /* ---- Scene 1 (0.0–1.5s): word-by-word quiet fade, grey -> white,
+              synced under "Tu auto carga mientras dormís." (VO 0–1.71s).
+              Flat opacity+color stagger — still register, no waterfall. ---- */
+      var words = gsap.utils.toArray(".md4-word");
+      var wordAt = [0.05, 0.3, 0.6, 0.92, 1.24];
+      words.forEach(function (el, i) {
+        tl.fromTo(
+          el,
+          { opacity: 0, color: "#50484d" },
+          { opacity: 1, color: "#ffffff", duration: 0.3, ease: "power2.out" },
+          wordAt[i]
+        );
+      });
+
+      /* ---- Scene 2 (1.5–2.3s): text clears itself — shrink-toward-center
+              + fade (scale-swap-transition, exit half)... ---- */
+      tl.to(
+        "#md4-tagline",
+        { scale: 0.74, opacity: 0, duration: 0.26, ease: "power2.in" },
+        1.52
+      );
+
+      /* ...and on the emptied frame the mark spring-BLOOMS from zero at dead
+         center with slight rotation (spring-pop-entrance — the film's one
+         permitted overshoot), timed to the "Hablemos" VO onset (~1.81s). */
+      tl.fromTo(
+        "#md4-mark",
+        { scale: 0, opacity: 0, rotation: -10, x: MARK_CENTER_X },
+        {
+          scale: 1,
+          opacity: 1,
+          rotation: 0,
+          duration: 0.46,
+          ease: "back.out(1.6)",
+        },
+        1.7
+      );
+
+      /* Mark slides one step left while the wordmark reveals to its right
+         with visible partial states (clip-path wipe). */
+      tl.to(
+        "#md4-mark",
+        { x: 0, duration: 0.34, ease: "power2.inOut" },
+        1.98
+      );
+      tl.fromTo(
+        "#md4-wordmark",
+        { clipPath: "inset(0% 100% 0% 0%)" },
+        {
+          clipPath: "inset(0% 0% 0% 0%)",
+          duration: 0.34,
+          ease: "power2.out",
+        },
+        1.98
+      );
+
+      /* ---- Scene 3 (~2.05s+): on the VO's "Hablemos", the magenta HABLEMOS
+              pill spring-pops below the lockup (soft settle, no overshoot) —
+              then everything holds dead-static to the last frame. ---- */
+      tl.fromTo(
+        "#md4-cta",
+        { scale: 0, opacity: 0, y: 22 },
+        { scale: 1, opacity: 1, y: 0, duration: 0.32, ease: "power3.out" },
+        2.04
+      );
+      tl.fromTo(
+        "#md4-url",
+        { opacity: 0 },
+        { opacity: 1, duration: 0.3, ease: "power2.out" },
+        2.18
+      );
+
+      /* Deliberate hold: final frame of the film — dead static after ~2.36s. */
+    
+      /* hf-hold-pad: extiende el timeline hasta la duración del root (3.6s) para que el hold final sea estable en cualquier seek */
+      tl.to({}, { duration: 0.001 }, 3.599);
+    })();
+  </script>
+</template>
