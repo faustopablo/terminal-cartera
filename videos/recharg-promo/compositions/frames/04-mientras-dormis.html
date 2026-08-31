@@ -79,6 +79,25 @@
       display: flex;
       justify-content: center;
     }
+    .md4-url {
+      margin-top: 22px;
+      font-weight: 600;
+      font-size: 26px;
+      letter-spacing: 0.06em;
+      color: rgba(255, 255, 255, 0.82);
+      text-align: center;
+      opacity: 0;
+      will-change: opacity;
+    }
+    .md4-cta-col {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .md4-cta-link {
+      text-decoration: none;
+      display: inline-block;
+    }
     .md4-cta {
       background: #ec13a0;
       color: #0b0f0f;
@@ -147,9 +166,14 @@
         <div class="md4-wordmark" id="md4-wordmark">Recharg</div>
       </div>
 
-      <!-- Scene 3 — CTA pill -->
+      <!-- Scene 3 — CTA pill (linkeada) + URL visible -->
       <div class="md4-cta-row">
-        <div class="md4-cta" id="md4-cta">HABLEMOS</div>
+        <div class="md4-cta-col">
+          <a class="md4-cta-link" href="http://www.recharg.com.ar" target="_blank" rel="noopener">
+            <div class="md4-cta" id="md4-cta">HABLEMOS</div>
+          </a>
+          <div class="md4-url" id="md4-url">www.recharg.com.ar</div>
+        </div>
       </div>
     </div>
   </div>
@@ -229,6 +253,12 @@
         { scale: 0, opacity: 0, y: 22 },
         { scale: 1, opacity: 1, y: 0, duration: 0.32, ease: "power3.out" },
         2.04
+      );
+      tl.fromTo(
+        "#md4-url",
+        { opacity: 0 },
+        { opacity: 1, duration: 0.3, ease: "power2.out" },
+        2.18
       );
 
       /* Deliberate hold: final frame of the film — dead static after ~2.36s. */
