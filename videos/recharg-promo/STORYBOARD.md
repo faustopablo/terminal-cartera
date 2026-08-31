@@ -95,7 +95,7 @@ keyMessage: Cargador dedicado + potencia real + carga visible.
 - voiceover: "Tu auto carga mientras dormís. Hablemos."
 - duration: 2.368s
 - transition_in: crossfade
-- status: outline
+- status: animated
 - src: compositions/frames/04-mientras-dormis.html
 - type: cta
 - persuasion: Future pacing + risk reversal suave (una conversación, no una compra)
